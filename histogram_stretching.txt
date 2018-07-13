@@ -1,0 +1,27 @@
+for i = 1:102
+pic_gaussian_blur = imread(['../3_gaussian blur/' num2str(i) '.bmp']);
+
+mean_value=mean2(pic_gaussian_blur);
+std_value=std2(pic_gaussian_blur);
+ 
+lowin=mean_value-(1.1*std_value);
+highin=mean_value+(1.1*std_value);
+
+ 
+  if lowin<0
+
+       lowin=0;
+  end
+  
+ 
+  if highin>255
+      
+      highin=255;
+  end
+
+  lowout=0;
+  highout=255;
+
+  gamma=1;
+
+pic_stretching = imadjust(pic_gaussian_blur,[double(lowin)/255;double(highin)/255],[double(lowout)/255;double(highout)/255],gamma);
